@@ -20,10 +20,12 @@ npm install
 
 2. **Create `.env` file** in the backend directory:
 ```bash
-DATABASE_URL="file:./dev.db"
+DATABASE_URL="postgresql://postgres:postgres@localhost:5432/auth_db?schema=public"
 JWT_SECRET="your-super-secret-jwt-key-change-this-in-production"
-PORT=5000
+PORT=5001
 ```
+
+**Note:** Make sure PostgreSQL is installed and running. See `README_POSTGRESQL.md` for detailed setup instructions.
 
 3. **Generate Prisma Client:**
 ```bash
@@ -40,7 +42,7 @@ npm run prisma:migrate
 npm run dev
 ```
 
-The server will run on `http://localhost:5000`
+The server will run on `http://localhost:5001`
 
 ## Troubleshooting
 
@@ -56,7 +58,7 @@ The server will run on `http://localhost:5000`
 **Solution:** Run `npm run prisma:generate` to generate the Prisma Client.
 
 ### Error: Migration failed
-**Solution:** Make sure the `.env` file exists and contains `DATABASE_URL="file:./dev.db"`
+**Solution:** Make sure the `.env` file exists and contains the PostgreSQL connection string. Also ensure PostgreSQL is installed and running.
 
 ## API Endpoints
 
@@ -69,21 +71,21 @@ The server will run on `http://localhost:5000`
 
 ### Signup
 ```bash
-curl -X POST http://localhost:5000/api/auth/signup \
+curl -X POST http://localhost:5001/api/auth/signup \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com","password":"password123","name":"John Doe"}'
 ```
 
 ### Login
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:5001/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"user@example.com","password":"password123"}'
 ```
 
 ### Get User Info
 ```bash
-curl -X GET http://localhost:5000/api/auth/me \
+curl -X GET http://localhost:5001/api/auth/me \
   -H "Authorization: Bearer YOUR_JWT_TOKEN"
 ```
 
