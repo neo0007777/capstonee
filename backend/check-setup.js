@@ -49,10 +49,18 @@ if (fs.existsSync(path.join(__dirname, 'node_modules/@prisma/client'))) {
 
 // Check 4: Database
 console.log('\n4. Checking database...');
-if (fs.existsSync(path.join(__dirname, 'prisma/dev.db'))) {
-  console.log('   ✅ Database file exists');
+// For MySQL, we check connection instead of file existence
+const dbUrl = process.env.DATABASE_URL || '';
+if (dbUrl.includes('mysql://')) {
+  console.log('   ✅ MySQL database configured');
+} else if (dbUrl.includes('file:')) {
+  if (fs.existsSync(path.join(__dirname, 'prisma/dev.db'))) {
+    console.log('   ✅ Database file exists');
+  } else {
+    console.log('   ❌ Database file not found. Run: npm run prisma:migrate');
+  }
 } else {
-  console.log('   ❌ Database file not found. Run: npm run prisma:migrate');
+  console.log('   ⚠️  Database type not detected');
 }
 
 // Check 5: Database connection

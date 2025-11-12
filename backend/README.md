@@ -20,12 +20,12 @@ npm install
 
 2. **Create `.env` file** in the backend directory:
 ```bash
-DATABASE_URL="postgresql://postgres:postgres@localhost:5432/auth_db?schema=public"
+DATABASE_URL="mysql://root:password@localhost:3306/auth_db"
 JWT_SECRET="your-super-secret-jwt-key-change-this-in-production"
 PORT=5001
 ```
 
-**Note:** Make sure PostgreSQL is installed and running. See `README_POSTGRESQL.md` for detailed setup instructions.
+**Note:** Make sure MySQL is installed and running. See `MYSQL_SETUP.md` for detailed setup instructions.
 
 3. **Generate Prisma Client:**
 ```bash
@@ -58,7 +58,7 @@ The server will run on `http://localhost:5001`
 **Solution:** Run `npm run prisma:generate` to generate the Prisma Client.
 
 ### Error: Migration failed
-**Solution:** Make sure the `.env` file exists and contains the PostgreSQL connection string. Also ensure PostgreSQL is installed and running.
+**Solution:** Make sure the `.env` file exists and contains the MySQL connection string. Also ensure MySQL is installed and running.
 
 ## API Endpoints
 
